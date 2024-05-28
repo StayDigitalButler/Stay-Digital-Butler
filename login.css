@@ -1,0 +1,45 @@
+body {
+    font-family: Cairo, sans-serif;
+    background-color: #fff; /* Weißer Hintergrund */
+    color: #333; /* Dunkler Text */
+    width: 400px;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #C83806; /* Orange Überschrift */
+    font-family: Cairo, sans-serif;
+  }
+  
+  label {
+    color: #666; /* Grauer Text für Labels */
+  }
+  
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Cairo, sans-serif;
+  }
+  
+  button {
+    background-color: #C83806; /* Orange Hintergrund für Button */
+    color: #fff; /* Weißer Text auf Button */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Cairo, sans-serif;
+  }
+  
+  button:hover {
+    background-color: #B32E00; /* Dunkleres Orange bei Hover */
+  }
+  

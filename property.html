@@ -1,0 +1,65 @@
+<html>
+<head>
+  <title>Eigenschaft erstellen</title>
+  <link rel="stylesheet" type="text/css" href="property.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Erstellen einer neuen Eigenschaft</h1>
+    <p>Bitte gib folgende Informationen an:</p>
+    <form id="settingsForm">
+
+        <label for="apiKey2">API Key:</label><br>
+        <input type="text" id="apiKey2" name="apiKey2"><br><br>
+        <label for="pipedriveURL2">Pipedrive URL:</label><br>
+        <input type="text" id="pipedriveURL2" name="pipedriveURL2" placeholder="https://[kunde].pipedrive.com"><br><br><br>
+
+      <label for="category">Kategorie:</label><br>
+      <select type="dropdown" id="category" name="category">
+        <option>-</option>
+        <option value="Kontakt">Kontakt</option>
+        <option value="Deal">Deal</option>
+      </select><br><br>
+
+      <label for="propertyType">Typ der Eigenschaft:</label><br>
+      <select type="dropdown" id="propertyType" name="propertyType">
+        <option>-</option>
+        <option value="Text">Text</option>
+        <option value="Nummer">Nummer</option>
+        <option value="Dropdown">Dropdown</option>
+      </select><br><br>
+
+      <div class="text" id="text">
+        <label for="propertyText">Name der Eigenschaft:</label><br>
+        <input type="text" id="propertyText" name="propertyText"><br><br>
+      </div>
+
+      <div class="dropdown" id="dropdown">
+        <label for="propertyDropdown">Name der Eigenschaft:</label><br>
+        <input type="text" id="propertyDropdown" name="propertyDropdown"><br><br>
+        <div class="newOptionsContainer">
+            <label class="options" for="propertyOption1">Optionen:</label><br>
+            <div class="addOptionContainer">
+                <button id="addOption">+</button>
+            </div>
+            <div class="newOptionsRow">
+                <input class="options" type="text" id="propertyOption1" name="propertyOption1"><br>
+            </div>
+            <div id="newOptions">
+                
+            </div>
+        </div>
+      </div>
+
+
+
+      <button type="submit" id="createBtnProperty">Jetzt erstellen</button>
+    </form>
+    <p id="message"></p>
+  </div>
+  <div id="overlay2">
+    <div class="loader"></div>
+  </div>
+  <script src="property.js"></script>
+</body>
+</html>

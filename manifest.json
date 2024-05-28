@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "version": "1.0",
+    "name": "Stay Digital Butler",
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["main.js"]
+        }
+    ],
+    "icons": {
+        "48": "icon_180.png",
+        "96": "icon_180.png"
+    },
+    
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["storage"],
+    "action": {
+        "default_popup": "login.html",
+        "default_icon": {
+            "19": "icon_180.png",
+            "38": "icon_180.png"
+        }
+    }
+}

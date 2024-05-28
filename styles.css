@@ -1,0 +1,43 @@
+body {
+    font-family: Cairo, sans-serif;
+    background-color: #fff; /* Weißer Hintergrund */
+    color: #333; /* Dunkler Text */
+    width: 400px;
+  }
+  
+  .container {
+    padding: 20px;
+  }
+  
+  h1 {
+    color: #C83806; /* Orange Überschrift */
+    font-family: Cairo, sans-serif;
+  }
+  
+  button {
+    background-color: #C83806; /* Orange Hintergrund für Button */
+    color: #fff; /* Weißer Text auf Button */
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10%;
+    font-family: Cairo, sans-serif;
+  }
+  
+  button:hover {
+    background-color: #B32E00; /* Dunkleres Orange bei Hover */
+  }
+
+  #header {
+    margin-bottom: 20%;
+  }
+  p {
+    font-size: 18px;
+    font-family: Cairo, sans-serif;
+  }
+  #logo {
+    display: block;
+    margin: auto;
+  }

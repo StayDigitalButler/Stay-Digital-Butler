@@ -1,0 +1,203 @@
+document.addEventListener('DOMContentLoaded', async function() {
+
+    var buttonCreateCrm = document.getElementById('createBtn');
+
+    // Funktion zum Anzeigen des Overlays mit Ladeanimation
+    function showLoadingScreen() {
+        const overlay           = document.getElementById('overlay');
+        overlay.style.display   = 'block';
+    }
+
+    // Funktion zum Ausblenden des Overlays mit Ladeanimation
+    function hideLoadingScreen() {
+        const overlay           = document.getElementById('overlay');
+        overlay.style.display   = 'none';
+    }
+
+    async function createPipeline() {
+
+        showLoadingScreen();
+
+        var token   = document.getElementById('apiKey').value;
+        var url     = document.getElementById('pipedriveURL').value;
+        var headers = {"Content-Type": "application/json"};
+  
+
+        // Neue Pipeline erstellen
+        var url_newPipeline     = `${url}/api/v2/pipelines?api_token=${token}`;
+        var data                = { "name": "Stay Digital", "is_deal_probability_enabled": true };
+        
+        try {
+            const response_newPipeline = await fetch(url_newPipeline, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(data)
+            });
+            var responseData = await response_newPipeline.json();
+
+            hideLoadingScreen();
+
+            createStages(token, url, responseData, headers);
+            createPersonFields(token, url, headers);
+            let kundentyp_Id = await createDealField(token, url, headers);
+            await createFilters(token, url, headers, kundentyp_Id);
+
+        } catch(error) {
+            alert(error);
+        }
+
+    }
+
+    async function createStages(token, url, responseData, headers) {
+
+        // Dealphasen anlegen
+        var url_newStage = `${url}/api/v2/stages?api_token=${token}`;
+        var stages = [
+            { "name": "\u{1F4E9} Neuer Lead", "pipeline_id": responseData.data.id, "deal_probability": 20 },
+            { "name": "\u{1F4E9} Kunde nicht erreicht 1", "pipeline_id": responseData.data.id, "deal_probability": 20 },
+            { "name": "\u{1F4E9} Kunde nicht erreicht 2", "pipeline_id": responseData.data.id, "deal_probability": 10 },
+            { "name": "\u{1F4E9} Falsche Telefonnummer", "pipeline_id": responseData.data.id, "deal_probability": 10 },
+            { "name": "Vor Ort Termin vereinbart", "pipeline_id": responseData.data.id, "deal_probability": 50 },
+            { "name": "\u{1F4E9} Angebot erstellt", "pipeline_id": responseData.data.id, "deal_probability": 60 },
+            { "name": "Angebot verschickt", "pipeline_id": responseData.data.id, "deal_probability": 60 },
+            { "name": "\u{1F4E9} Follow Up 1", "pipeline_id": responseData.data.id, "deal_probability": 60 },
+            { "name": "\u{1F4E9} Follow Up 2", "pipeline_id": responseData.data.id, "deal_probability": 50 },
+            { "name": "\u{1F4E9} Gewonnen", "pipeline_id": responseData.data.id, "deal_probability": 100 },
+            { "name": "Verloren", "pipeline_id": responseData.data.id, "deal_probability": 0 }
+        ];
+
+        try {
+            for (var singleStage of stages) {
+                var response_newStage = await fetch(url_newStage, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(singleStage)
+                });
+            }
+            alert("CRM erfolgreich eingerichtet");
+            window.location.href = 'crm.html';
+        } catch(error) {
+            alert(error);
+        }
+        
+
+    }
+
+    async function createPersonFields(token, url, headers) {
+
+        var url_newPersonfield = `${url}/api/v1/personFields?api_token=${token}`;
+
+        var all_personFields = [
+            {"name": "WhatsApp Link", "field_type": "varchar"},
+            {"name": "Adresse", "field_type": "address"},
+            {"name": "Abweichende Objektadresse", "field_type": "address"},
+            {"name": "Postleitzahl", "field_type": "double"},
+            {"name": "Ort", "field_type": "varchar"}
+        ]
+
+        for (var singlePersonField of all_personFields) {
+
+            try {
+                let response_personField = await fetch(url_newPersonfield, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(singlePersonField)
+                });
+    
+                response_personField = await response_personField.json();
+
+            } catch(error) {
+                alert(error);
+            }
+            
+        }
+
+    }
+
+    async function createDealField(token, url, headers) {
+
+        var url_newDealfield = `${url}/api/v1/dealFields?api_token=${token}`;
+
+        var all_dealFields = [
+            {"name": "Kundenart", "field_type": "enum", "options": [{ "label": "A-Kunde" }, { "label": "B-Kunde" }, { "label": "C-Kunde" }]},
+            {"name": "Vor Ort Termin Uhrzeit", "field_type": "time"},
+            {"name": "Vor Ort Termin Datum", "field_type": "date"}
+        ];
+
+        let kundentyp_Id = "";
+
+        for (var singleDealfield of all_dealFields) {
+
+            try {
+                let response_dealField = await fetch(url_newDealfield, {
+                    method: 'POST',
+                    headers: headers,
+                    body: JSON.stringify(singleDealfield)
+                });
+    
+                response_dealField = await response_dealField.json();
+    
+                if (response_dealField.data.name === "Kundenart") {
+                    kundentyp_Id = response_dealField.data.id;
+                }
+
+            } catch(error) {
+                alert(error);
+            }
+            
+        }
+
+        return kundentyp_Id;
+
+    }
+
+    async function createFilters(token, url, headers, kundentyp_Id) {
+
+
+        var url_newFilter = `${url}/api/v1/filters?api_token=${token}`;
+
+        var allFilters = [
+            {
+                "name": "A-Kunden",
+                "type": "deals",
+                "conditions": { "object": "deal", "field_id": kundentyp_Id, "operator": "=", "value": "A-Kunde" }
+            },
+            {
+                "name": "B-Kunden",
+                "type": "deals",
+                "conditions": { "object": "deal", "field_id": kundentyp_Id, "operator": "=", "value": "B-Kunde" }
+            },
+            {
+                "name": "C-Kunden",
+                "type": "deals",
+                "conditions": { "object": "deal", "field_id": kundentyp_Id, "operator": "=", "value": "C-Kunde" }
+            }
+        ]
+
+        for (var singleFilter of allFilters) {
+
+            let response_newFilter = await fetch(url_newFilter, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(singleFilter)
+            });
+    
+            response_newFilter = await response_newFilter.json();
+
+
+        }
+
+    }
+
+    async function createActivityType() {}
+    async function deleateActivityType() {}
+
+    buttonCreateCrm.addEventListener('click', async function(event) {
+
+        event.preventDefault();
+
+        createPipeline();
+
+    });
+
+});

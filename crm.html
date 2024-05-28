@@ -1,0 +1,31 @@
+<html>
+<head>
+  <title>CRM erstellen</title>
+  <link rel="stylesheet" type="text/css" href="crm.css">
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>Erstellen deines CRM Systems</h1>
+    <p>Bitte gib folgende Informationen zu deinem Pipedrive an:</p>
+
+    <form id="settingsForm">
+      <label for="apiKey">API Key:</label><br>
+      <input type="text" id="apiKey" name="apiKey"><br>
+      <label for="pipedriveURL">Pipedrive URL:</label><br>
+      <input type="text" id="pipedriveURL" name="pipedriveURL" placeholder="https://[kunde].pipedrive.com"><br><br>
+      <button type="submit" id="createBtn">Jetzt erstellen</button>
+    </form>
+
+    <p id="message"></p>
+
+  </div>
+
+  <div id="overlay">
+    <div class="loader"></div>
+  </div>
+
+  <script src="crm.js"></script>
+</body>
+</html>
