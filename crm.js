@@ -38,9 +38,12 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             createStages(token, url, responseData, headers);
             createPersonFields(token, url, headers);
+
             let kundentyp_Id = await createDealField(token, url, headers);
+
             await createFilters(token, url, headers, kundentyp_Id);
             await getActivityTypes(token, url, headers);
+            
             createActivityType(token, url, headers);
 
         } catch(error) {
@@ -193,6 +196,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     }
 
+    // Aktivitätstypen erstellen
     async function createActivityType(token, url, headers) {
         
         var url_newActivityType = `${url}/api/v1/activityTypes?api_token=${token}`;
@@ -217,6 +221,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
     }
 
+    // Aktivitätstypen abfragen
     async function getActivityTypes(token, url, headers) {
 
         var url_getActivityTypes = `${url}/api/v1/activityTypes?api_token=${token}`;
@@ -243,6 +248,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     }
 
+    // Aktivitätstypen löschen
     async function deleateActivityType(token, url, headers, id) {
         
         var url_deleteActivityType = `${url}/api/v1/activityTypes/${id}?api_token=${token}`;
