@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         overlay.style.display   = 'none';
     }
 
+    // Pipeline erstellen
     async function createPipeline() {
 
         showLoadingScreen();
@@ -22,8 +23,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         var url     = document.getElementById('pipedriveURL').value;
         var headers = {"Content-Type": "application/json"};
   
-
-        // Neue Pipeline erstellen
         var url_newPipeline     = `${url}/api/v2/pipelines?api_token=${token}`;
         var data                = { "name": "Stay Digital", "is_deal_probability_enabled": true };
         
@@ -41,6 +40,8 @@ document.addEventListener('DOMContentLoaded', async function() {
             createPersonFields(token, url, headers);
             let kundentyp_Id = await createDealField(token, url, headers);
             await createFilters(token, url, headers, kundentyp_Id);
+            await getActivityTypes(token, url, headers);
+            createActivityType(token, url, headers);
 
         } catch(error) {
             alert(error);
@@ -48,9 +49,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     }
 
+    // Dealphasen anlegen
     async function createStages(token, url, responseData, headers) {
 
-        // Dealphasen anlegen
         var url_newStage = `${url}/api/v2/stages?api_token=${token}`;
         var stages = [
             { "name": "\u{1F4E9} Neuer Lead", "pipeline_id": responseData.data.id, "deal_probability": 20 },
@@ -83,6 +84,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     }
 
+    // Kontakteigenschaften anlegen
     async function createPersonFields(token, url, headers) {
 
         var url_newPersonfield = `${url}/api/v1/personFields?api_token=${token}`;
@@ -114,6 +116,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     }
 
+    // Dealeigenschaften anlegen
     async function createDealField(token, url, headers) {
 
         var url_newDealfield = `${url}/api/v1/dealFields?api_token=${token}`;
@@ -151,6 +154,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     }
 
+    // Filter anlegen
     async function createFilters(token, url, headers, kundentyp_Id) {
 
 
@@ -189,8 +193,73 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     }
 
-    async function createActivityType() {}
-    async function deleateActivityType() {}
+    async function createActivityType(token, url, headers) {
+        
+        var url_newActivityType = `${url}/api/v1/activityTypes?api_token=${token}`;
+
+        var activityType = {
+            "name": "Vor Ort Termin",
+            "icon_key": "car",
+            "color": "000000"
+        };
+
+        try {
+            let response_activityType = await fetch(url_newActivityType, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify(activityType)
+            });
+
+            response_activityType = await response_activityType.json();
+
+        } catch(error) {
+            alert(error);
+        }
+    }
+
+    async function getActivityTypes(token, url, headers) {
+
+        var url_getActivityTypes = `${url}/api/v1/activityTypes?api_token=${token}`;
+
+        try {
+            let response_getActivityTypes = await fetch(url_getActivityTypes, {
+                method: 'GET',
+                headers: headers
+            });
+
+            response_getActivityTypes = await response_getActivityTypes.json();
+
+            for (var singleActivityType of response_getActivityTypes["data"]) {
+
+                if (singleActivityType["name"] == "Meeting" || singleActivityType["name"] == "Frist" || singleActivityType["name"] == "Mittagessen") {
+                    deleateActivityType(token, url, headers, singleActivityType["id"])
+                }
+
+            }
+
+        } catch(error) {
+            alert(error);
+        }
+
+    }
+
+    async function deleateActivityType(token, url, headers, id) {
+        
+        var url_deleteActivityType = `${url}/api/v1/activityTypes/${id}?api_token=${token}`;
+
+        try {
+            let response_deleteActivityType = await fetch(url_deleteActivityType, {
+                method: 'DELETE',
+                headers: headers
+            });
+
+            response_deleteActivityType = await response_deleteActivityType.json();
+
+        } catch(error) {
+            alert(error);
+        }
+
+    }
 
     buttonCreateCrm.addEventListener('click', async function(event) {
 
