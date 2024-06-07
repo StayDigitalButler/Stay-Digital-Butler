@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         overlay.style.display   = 'none';
     }
 
-    // Pipeline erstellen
+    // Pipeline erstelle
     async function createPipeline() {
 
         showLoadingScreen();
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             await createFilters(token, url, headers, kundentyp_Id);
             await getActivityTypes(token, url, headers);
-            
+
             createActivityType(token, url, headers);
 
         } catch(error) {
