@@ -1,4 +1,4 @@
-const REPO_OWNER = 'StayDigitalButler'; // z.B. 'octocat'
+/*const REPO_OWNER = 'StayDigitalButler'; // z.B. 'octocat'
 const REPO_NAME = 'Stay-Digital-Butler'; // z.B. 'Hello-World'
 const BRANCH = 'main'; // Der Branch, den du überprüfen möchtest
 
@@ -43,4 +43,4 @@ setInterval(checkForUpdate, CHECK_INTERVAL);
 
 chrome.runtime.onInstalled.addListener(() => {
     console.log('Extension installiert oder aktualisiert.');
-});
+});*/

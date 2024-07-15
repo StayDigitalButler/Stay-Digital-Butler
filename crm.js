@@ -1,5 +1,20 @@
 document.addEventListener('DOMContentLoaded', async function() {
 
+    const textFields = document.querySelectorAll("input[type='text'], textarea");
+
+    /* textFields.forEach(field => {
+        // Restore the text field value from localStorage
+        const savedValue = localStorage.getItem(field.name || field.id);
+        if (savedValue) {
+        field.value = savedValue;
+        }
+
+        // Save the text field value to localStorage on input
+        field.addEventListener("input", () => {
+        localStorage.setItem(field.name || field.id, field.value);
+        });
+    });*/
+
     var buttonCreateCrm = document.getElementById('createBtn');
 
     // Funktion zum Anzeigen des Overlays mit Ladeanimation
@@ -57,15 +72,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         var url_newStage = `${url}/api/v2/stages?api_token=${token}`;
         var stages = [
-            { "name": "\u{1F4E9} Neuer Lead", "pipeline_id": responseData.data.id, "deal_probability": 20 },
+            { "name": "\u{1F4E9} Neuer Anfrage", "pipeline_id": responseData.data.id, "deal_probability": 20 },
             { "name": "\u{1F4E9} Kunde nicht erreicht 1", "pipeline_id": responseData.data.id, "deal_probability": 20 },
             { "name": "\u{1F4E9} Kunde nicht erreicht 2", "pipeline_id": responseData.data.id, "deal_probability": 10 },
             { "name": "\u{1F4E9} Falsche Telefonnummer", "pipeline_id": responseData.data.id, "deal_probability": 10 },
             { "name": "Vor Ort Termin vereinbart", "pipeline_id": responseData.data.id, "deal_probability": 50 },
             { "name": "\u{1F4E9} Angebot erstellt", "pipeline_id": responseData.data.id, "deal_probability": 60 },
             { "name": "Angebot verschickt", "pipeline_id": responseData.data.id, "deal_probability": 60 },
-            { "name": "\u{1F4E9} Follow Up 1", "pipeline_id": responseData.data.id, "deal_probability": 60 },
-            { "name": "\u{1F4E9} Follow Up 2", "pipeline_id": responseData.data.id, "deal_probability": 50 },
+            { "name": "\u{1F4E9} Nachfassen 1", "pipeline_id": responseData.data.id, "deal_probability": 60 },
+            { "name": "\u{1F4E9} Nachfassen 2", "pipeline_id": responseData.data.id, "deal_probability": 50 },
             { "name": "\u{1F4E9} Gewonnen", "pipeline_id": responseData.data.id, "deal_probability": 100 },
             { "name": "Verloren", "pipeline_id": responseData.data.id, "deal_probability": 0 }
         ];
@@ -103,7 +118,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             {"name": "Rechnungsadresse (falls abweichend)", "field_type": "address"},
             {"name": "Bearbeitunsstatus des Feedbacks", "field_type": "enum", "options": [{"label": "Noch offen"}, {"label": "Beantwortet"}, {"label": "Gemeldet"}]},
             {"name": "Kundenbewertung Datum", "field_type": "date"},
-            {"name": "Kundenbewertung Status", "field_type": "enum", "options": [{"label": "Offen"}, {"label": "Positiv bewertet"}, {"label": "Negativ bewertet"}]},
+            {"name": "Kundenbewertung Status", "field_type": "enum", "options": [{"label": "Offen"}, {"label": "Positiv bewertet"}, {"label": "Negativ bewertet"}]}
         ]
 
         for (var singlePersonField of all_personFields) {
