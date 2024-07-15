@@ -95,9 +95,15 @@ document.addEventListener('DOMContentLoaded', async function() {
         var all_personFields = [
             {"name": "WhatsApp Link", "field_type": "varchar"},
             {"name": "Adresse", "field_type": "address"},
-            {"name": "Abweichende Objektadresse", "field_type": "address"},
             {"name": "Postleitzahl", "field_type": "double"},
-            {"name": "Ort", "field_type": "varchar"}
+            {"name": "Ort", "field_type": "varchar"},
+            {"name": "Fax", "field_type": "varchar"},
+            {"name": "Zusatz (Kontakt)", "field_type": "varchar"},
+            {"name": "Kundennummer", "field_type": "varchar"},
+            {"name": "Rechnungsadresse (falls abweichend)", "field_type": "address"},
+            {"name": "Bearbeitunsstatus des Feedbacks", "field_type": "enum", "options": [{"label": "Noch offen"}, {"label": "Beantwortet"}, {"label": "Gemeldet"}]},
+            {"name": "Kundenbewertung Datum", "field_type": "date"},
+            {"name": "Kundenbewertung Status", "field_type": "enum", "options": [{"label": "Offen"}, {"label": "Positiv bewertet"}, {"label": "Negativ bewertet"}]},
         ]
 
         for (var singlePersonField of all_personFields) {
@@ -127,7 +133,17 @@ document.addEventListener('DOMContentLoaded', async function() {
         var all_dealFields = [
             {"name": "Kundenart", "field_type": "enum", "options": [{ "label": "A-Kunde" }, { "label": "B-Kunde" }, { "label": "C-Kunde" }]},
             {"name": "Vor Ort Termin Uhrzeit", "field_type": "time"},
-            {"name": "Vor Ort Termin Datum", "field_type": "date"}
+            {"name": "Vor Ort Termin Datum", "field_type": "date"},
+            {"name": "Verantwortlicher Mitarbeiter für den Vor-Ort-Termin", "field_type": ""},
+            {"name": "Abweichende Objektadresse", "field_type": "address"},
+            {"name": "Status des Projekts", "field_type": "enum", "options": [{"label": "Geplant"}, {"label": "In Ausführung"}, {"label": "Abgeschlossen"}]},
+            {"name": "Voraussichtliches Enddatum des Projekts", "field_type": "date"},
+            {"name": "Startdatum des Projekts", "field_type": "date"},
+            {"name": "Zahlungsfälligkeitsdatum", "field_type": "date"},
+            {"name": "Zahlungseingangsdatum", "field_type": "date"},
+            {"name": "Rechnungsdatum", "field_type": "date"},
+            {"name": "Rechnungssnummer", "field_type": "varchar"},
+            {"name": "Zahlungsstatus", "field_type": "enum", "options": [{"label": "Offen"}, {"label": "Bezahlt"}, {"label": "Überfällig"}]}
         ];
 
         let kundentyp_Id = "";
