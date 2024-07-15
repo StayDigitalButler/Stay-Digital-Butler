@@ -16,7 +16,7 @@
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["storage"],
+    "permissions": ["storage", "notifications"],
     "action": {
         "default_popup": "login.html",
         "default_icon": {
