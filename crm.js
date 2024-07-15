@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             {"name": "Kundenart", "field_type": "enum", "options": [{ "label": "A-Kunde" }, { "label": "B-Kunde" }, { "label": "C-Kunde" }]},
             {"name": "Vor Ort Termin Uhrzeit", "field_type": "time"},
             {"name": "Vor Ort Termin Datum", "field_type": "date"},
-            {"name": "Verantwortlicher Mitarbeiter für den Vor-Ort-Termin", "field_type": ""},
+            {"name": "Verantwortlicher Mitarbeiter für den Vor-Ort-Termin", "field_type": "people"},
             {"name": "Abweichende Objektadresse", "field_type": "address"},
             {"name": "Status des Projekts", "field_type": "enum", "options": [{"label": "Geplant"}, {"label": "In Ausführung"}, {"label": "Abgeschlossen"}]},
             {"name": "Voraussichtliches Enddatum des Projekts", "field_type": "date"},
