@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             {"name": "Zahlungsf\u00e4lligkeitsdatum", "field_type": "date"},
             {"name": "Zahlungseingangsdatum", "field_type": "date"},
             {"name": "Rechnungsdatum", "field_type": "date"},
-            //{"name": "Rechnungssnummer", "field_type": "varchar"},
+            {"name": "Rechnungssnummer", "field_type": "varchar"},
             {"name": "Zahlungsstatus", "field_type": "enum", "options": [{"label": "Offen"}, {"label": "Bezahlt"}, {"label": "Überfällig"}]}
         ];
 
