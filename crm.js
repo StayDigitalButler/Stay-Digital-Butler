@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', async function() {
 
-    const textFields = document.querySelectorAll("input[type='text'], textarea");
+    // const textFields = document.querySelectorAll("input[type='text'], textarea");
 
     /* textFields.forEach(field => {
         // Restore the text field value from localStorage
         const savedValue = localStorage.getItem(field.name || field.id);
         if (savedValue) {
-        field.value = savedValue;
+        field.value = savedValue;‚
         }
 
         // Save the text field value to localStorage on input
