@@ -61,6 +61,9 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             createActivityType(token, url, headers);
 
+            alert("CRM erfolgreich eingerichtet");
+            window.location.href = 'crm.html';
+
         } catch(error) {
             alert(error);
         }
@@ -93,8 +96,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                     body: JSON.stringify(singleStage)
                 });
             }
-            alert("CRM erfolgreich eingerichtet");
-            window.location.href = 'crm.html';
+            
         } catch(error) {
             alert(error);
         }
@@ -119,7 +121,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             {"name": "Bearbeitunsstatus des Feedbacks", "field_type": "enum", "options": [{"label": "Noch offen"}, {"label": "Beantwortet"}, {"label": "Gemeldet"}]},
             {"name": "Kundenbewertung Datum", "field_type": "date"},
             {"name": "Kundenbewertung Status", "field_type": "enum", "options": [{"label": "Offen"}, {"label": "Positiv bewertet"}, {"label": "Negativ bewertet"}]}
-        ]
+        ];
 
         for (var singlePersonField of all_personFields) {
 
@@ -157,7 +159,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             {"name": "Zahlungsfälligkeitsdatum", "field_type": "date"},
             {"name": "Zahlungseingangsdatum", "field_type": "date"},
             {"name": "Rechnungsdatum", "field_type": "date"},
-            {"name": "Rechnungssnummer", "field_type": "varchar"},
+            //{"name": "Rechnungssnummer", "field_type": "varchar"},
             {"name": "Zahlungsstatus", "field_type": "enum", "options": [{"label": "Offen"}, {"label": "Bezahlt"}, {"label": "Überfällig"}]}
         ];
 
