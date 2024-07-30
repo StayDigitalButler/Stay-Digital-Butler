@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             for (var singleActivityType of response_getActivityTypes["data"]) {
 
-                if (singleActivityType["name"] == "Meeting" || singleActivityType["name"] == "Frist" || singleActivityType["name"] == "Mittagessen") {
+                if (singleActivityType["name"] == "Meeting" || singleActivityType["name"] == "Frist" || singleActivityType["name"] == "Mittagessen" || singleActivityType["name"] == "E-Mail-Adresse") {
                     deleateActivityType(token, url, headers, singleActivityType["id"])
                 }
 
